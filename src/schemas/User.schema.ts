@@ -22,6 +22,9 @@ export class User {
 
   @Prop()
   isActive: boolean;
+
+  @Prop()
+  key: string;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
