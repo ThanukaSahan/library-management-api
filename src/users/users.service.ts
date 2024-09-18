@@ -32,4 +32,8 @@ export class UsersService {
       { new: true },
     );
   }
+
+  async deleteUser(userId: string) {
+    return await this.userModel.findByIdAndDelete(userId);
+  }
 }

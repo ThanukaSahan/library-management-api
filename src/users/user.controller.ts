@@ -6,10 +6,13 @@ import {
   Param,
   Patch,
   Post,
+  Delete,
+  Query,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/createUser.dto';
 import { ActiveUserDto } from './dto/activeUser.dt';
+import mongoose, { mongo } from 'mongoose';
 
 @Controller('users')
 export class UsersController {
@@ -41,5 +44,14 @@ export class UsersController {
   @Patch('activeDeactivateUser')
   async activeUsers(@Body() activeUsers: ActiveUserDto) {
     return await this.usersService.activeDeactivateUser(activeUsers);
+  }
+
+  @Delete('deletUser')
+  async deleteUser(@Query('id') id: string) {
+    const isValid = mongoose.Types.ObjectId.isValid(id);
+    if (!isValid) throw new HttpException('Invalid ID', 404);
+    const deleteUser = await this.usersService.deleteUser(id);
+    if (!deleteUser) throw new HttpException('Invalid ID', 404);
+    return true;
   }
 }
