@@ -27,7 +27,11 @@ export class AuthService {
       iv,
     );
     if (user.password === encryptedPassword) {
-      const payload = { sub: user.id, username: user.userName };
+      const payload = {
+        sub: user.id,
+        username: user.userName,
+        role: user.role,
+      };
       console.log(payload);
       return {
         access_token: await this.jwtService.signAsync(payload),

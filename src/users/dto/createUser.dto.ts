@@ -1,4 +1,5 @@
 import { IsEmail, IsNotEmpty, IsPhoneNumber, IsString } from 'class-validator';
+import { Role } from 'src/enum/role.enum';
 
 export class CreateUserDto {
   @IsEmail()
@@ -28,4 +29,6 @@ export class CreateUserDto {
   isActive: boolean = false;
 
   key: string;
+
+  role: string = Role.User;
 }
