@@ -18,14 +18,19 @@ export class UsersService {
   ) {}
 
   async createUser(createUserDto: CreateUserDto) {
-    const iv = randomBytes(16);
-    createUserDto.key = iv.toString('hex');
-    createUserDto.password = await this.encryption.encrypt(
-      createUserDto.password,
-      iv,
-    );
-    const newUser = new this.userModel(createUserDto);
-    return newUser.save();
+    try {
+      const iv = randomBytes(16);
+      createUserDto.role = 'user';
+      createUserDto.key = iv.toString('hex');
+      createUserDto.password = await this.encryption.encrypt(
+        createUserDto.password,
+        iv,
+      );
+      const newUser = new this.userModel(createUserDto);
+      return (await newUser.save())._id;
+    } catch (error) {
+      console.error('Error fetching user:', error);
+    }
   }
 
   getAllUsers() {

@@ -26,9 +26,19 @@ export class UsersController {
     private encryption: encryption,
   ) {}
   @Post('createUser')
-  createUser(@Body() createUserDto: CreateUserDto) {
+  async createUser(@Body() createUserDto: CreateUserDto) {
+    const result = await this.usersService.getUserById(createUserDto.userName);
+    console.log(result);
+    if (result) {
+      throw new HttpException('User already exists', 404);
+    }
     console.log(createUserDto);
-    return this.usersService.createUser(createUserDto);
+    const id = this.usersService.createUser(createUserDto);
+    if (id) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   @Get('getAllUers')
@@ -40,7 +50,7 @@ export class UsersController {
   async getUserByEmailId(@Param('email') email: string) {
     if (!email) throw new HttpException('Uesr Not Found', 404);
     const result = await this.usersService.getUserById(email);
-    if (result) {
+    if (!result) {
       throw new HttpException('Uesr Not Found', 404);
     }
     return result;
