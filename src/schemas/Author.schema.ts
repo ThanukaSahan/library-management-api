@@ -3,7 +3,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 @Schema()
 export class Author {
   @Prop({ unique: true, required: true })
-  _id: string;
+  id: string;
 
   @Prop({ unique: true, required: true })
   Name: string;
@@ -31,6 +31,9 @@ export class Author {
 
   @Prop()
   UpdaterUser: string;
+
+  @Prop()
+  IsDelete: boolean;
 }
 
 export const AuthorSchema = SchemaFactory.createForClass(Author);
