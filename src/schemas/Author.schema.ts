@@ -1,10 +1,9 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Type } from 'class-transformer';
+import { ObjectId, Types } from 'mongoose';
 
 @Schema()
 export class Author {
-  @Prop({ unique: true, required: true })
-  id: string;
-
   @Prop({ unique: true, required: true })
   Name: string;
 
