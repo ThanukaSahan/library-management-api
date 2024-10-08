@@ -33,6 +33,9 @@ export class Author {
 
   @Prop()
   IsDelete: boolean;
+
+  @Prop()
+  Image: string;
 }
 
 export const AuthorSchema = SchemaFactory.createForClass(Author);

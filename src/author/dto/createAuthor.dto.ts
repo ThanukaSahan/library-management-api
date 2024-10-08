@@ -21,4 +21,6 @@ export class CreateAuthorDto {
   Nationality: string;
 
   CreateUser: string;
+
+  Image: string;
 }

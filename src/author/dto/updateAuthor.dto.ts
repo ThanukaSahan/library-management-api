@@ -29,4 +29,6 @@ export class UpdateAuthorDto {
   UpdateDate: Date;
 
   UpdaterUser: string;
+
+  Image: string;
 }
