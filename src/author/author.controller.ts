@@ -58,4 +58,9 @@ export class AuthorController {
     await this.authorService.inactiveAuthors(id);
     return await this.authorService.getAllActiveAuthors();
   }
+
+  @Get('getById')
+  async getById(@Query('id') id: string) {
+    return await this.authorService.getbyId(id);
+  }
 }

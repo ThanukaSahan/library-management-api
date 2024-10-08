@@ -24,7 +24,7 @@ export class AuthorService {
   }
 
   async getbyId(id: string) {
-    return await this.authorModal.findOne({ id: id }).exec();
+    return await this.authorModal.findById(id).exec();
   }
 
   async getAllActiveAuthors() {
