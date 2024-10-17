@@ -16,10 +16,8 @@ export class UpdateAuthorDto {
   Name: string;
 
   @IsEmail()
-  @IsEmpty()
   Email: string;
 
-  @IsEmpty()
   Website: string;
 
   Biography: string;

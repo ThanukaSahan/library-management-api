@@ -48,13 +48,15 @@ export class AuthorController {
     if (author === null) {
       throw new HttpException('Author Not Found', 404);
     }
-    updateAuthor.UpdateDate = req['user'].sub;
+
+    updateAuthor.UpdaterUser = req['user'].sub;
+    updateAuthor.UpdateDate = new Date();
     await this.authorService.updateAuthors(updateAuthor);
     return await this.authorService.getAllActiveAuthors();
   }
 
   @Post('deleteAuthor')
-  async deleteAuthor(@Req() req: Request, @Query() id: string) {
+  async deleteAuthor(@Body() id: string) {
     await this.authorService.inactiveAuthors(id);
     return await this.authorService.getAllActiveAuthors();
   }

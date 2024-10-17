@@ -32,13 +32,17 @@ export class AuthorService {
   }
   async updateAuthors(updateAuthorDto: UpdateAuthorDto) {
     return await this.authorModal
-      .updateOne({ id: updateAuthorDto.id }, { $set: updateAuthorDto })
+      .findOneAndUpdate(
+        { _id: updateAuthorDto.id },
+        { $set: updateAuthorDto },
+        { new: true },
+      )
       .exec();
   }
 
   async inactiveAuthors(id: string) {
     return await this.authorModal
-      .findOneAndUpdate({ id: id }, { IsDelete: true }, { new: true })
+      .findOneAndUpdate({ _id: id }, { IsDelete: true }, { new: true })
       .exec();
   }
 }
